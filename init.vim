@@ -40,19 +40,6 @@ set t_ut=
 
 lua require('joao')
 
-let g:gruvbox_material_disable_italic_comment = 1
-
-set termguicolors
-set background=dark
-nnoremap <leader>l :set background=light<cr><leader>gZ
-nnoremap <leader>d :set background=dark<cr><leader>gZ
-colorscheme gruvbox-material
-
-
-let g:colors_off_a_little = 1
-let g:mapleader = " "
-let g:maplocalleader = ','
-
 set magic
 set wildignore=*.o,*~,*.pyc
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
@@ -90,9 +77,11 @@ let g:vscode_italic_comment = 1
 
 let g:rooter_patterns = ['.git', 'Gemfile.lock']
 
-set termguicolors
-set background=dark
 colorscheme vscode
+nnoremap <leader>d :set background=dark<cr><leader>gZ
+nnoremap <leader>l :set background=light<cr><leader>gZ
+set background=dark
+set termguicolors
 
 let g:mapleader = " "
 let g:maplocalleader = ','
