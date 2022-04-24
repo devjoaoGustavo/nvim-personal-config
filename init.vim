@@ -8,14 +8,10 @@ Plug 'hashivim/vim-terraform'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jremmen/vim-ripgrep'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'preservim/nerdtree'
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'sainnhe/gruvbox-material'
 Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -26,6 +22,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby', {  'for': 'ruby' }
 Plug 'wakatime/vim-wakatime'
+Plug 'preservim/vimux'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 
 filetype plugin on
@@ -77,9 +78,7 @@ let g:vscode_italic_comment = 1
 
 let g:rooter_patterns = ['.git', 'Gemfile.lock']
 
-colorscheme vscode
-nnoremap <leader>d :set background=dark<cr><leader>gZ
-nnoremap <leader>l :set background=light<cr><leader>gZ
+colorscheme base16-default-dark
 set background=dark
 set termguicolors
 
@@ -144,8 +143,8 @@ set wildignore=*.o,*~,*.pyc
 set wildmenu
 set wildmode=full
 
-nnoremap <c-p> :Files .<cr>
-nnoremap <c-s> :Buffers<cr>
+" nnoremap <c-p> :Files .<cr>
+" nnoremap <c-s> :Buffers<cr>
 nnoremap <leader>/ :Rg<space>
 nnoremap <leader>x :!xdg-open %<cr><cr>
 nnoremap <silent> <Esc><Esc> :w<cr>
@@ -160,6 +159,7 @@ nnoremap <silent> gb :G blame<cr>
 nnoremap <silent> gs :G<cr>
 nnoremap <silent> gy :let @+ = expand("%")<cr>
 nnoremap <silent> gz :e ~/.config/nvim/init.vim<cr>
+nnoremap <silent> ge :Telescope diagnostics<cr>
 nnoremap <silent><F4> :call VimuxRunLastCommand()<CR>
 nnoremap <silent><F5> :call VimuxRunCommand("bundle exec rspec " . bufname("%") . ":" . line("."))<CR>
 nnoremap <silent><F6> :call VimuxRunCommand("bundle exec rspec " . bufname("%"))<CR>
@@ -169,6 +169,8 @@ nnoremap <silent><leader>. :Lines<cr>
 nnoremap <silent><leader>bl :BLines<cr>
 nnoremap <silent><leader>hl :nohlsearch<CR>
 nnoremap gr :VimuxPromptCommand<cr>
+nnoremap <silent><M-j> zj
+nnoremap <silent><M-k> zk
 
 " git
 nnoremap <silent>gs :G<cr>
@@ -200,7 +202,7 @@ autocmd TermOpen * startinsert
 
 au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
 
-let g:fzf_buffers_jump = 1
+" let g:fzf_buffers_jump = 1
 let g:go_doc_popup_window = 1
 let g:go_fmt_autosave = 1
 let g:go_imports_autosave = 1
@@ -211,3 +213,7 @@ let g:ruby_host_prog = '~/.asdf/shims/neovim-ruby-host'
 let g:terraform_binary_path="~/.asdf/shims/terraform"
 let g:terraform_fmt_on_save=1
 
+nnoremap <c-p> <cmd>Telescope find_files<cr>
+nnoremap <c-t> <cmd>Telescope live_grep<cr>
+nnoremap <c-s> <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
