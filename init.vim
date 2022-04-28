@@ -8,8 +8,6 @@ Plug 'hashivim/vim-terraform'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jremmen/vim-ripgrep'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'preservim/nerdtree'
 Plug 'tomasiser/vim-code-dark'
@@ -23,14 +21,23 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby', {  'for': 'ruby' }
 Plug 'wakatime/vim-wakatime'
 Plug 'preservim/vimux'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'chriskempson/base16-vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'ms-jpq/coq_nvim', { 'branch': 'coq' }
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 call plug#end()
+
+let g:coq_settings = { 'auto_start': v:true }
 
 filetype plugin on
 filetype indent on
+
+set completeopt=menu,menuone,noselect
 
 syntax enable
 
@@ -143,8 +150,8 @@ set wildignore=*.o,*~,*.pyc
 set wildmenu
 set wildmode=full
 
-" nnoremap <c-p> :Files .<cr>
-" nnoremap <c-s> :Buffers<cr>
+nnoremap <c-p> :Files .<cr>
+nnoremap <c-s> :Buffers<cr>
 nnoremap <leader>/ :Rg<space>
 nnoremap <leader>x :!xdg-open %<cr><cr>
 nnoremap <silent> <Esc><Esc> :w<cr>
@@ -159,7 +166,6 @@ nnoremap <silent> gb :G blame<cr>
 nnoremap <silent> gs :G<cr>
 nnoremap <silent> gy :let @+ = expand("%")<cr>
 nnoremap <silent> gz :e ~/.config/nvim/init.vim<cr>
-nnoremap <silent> ge :Telescope diagnostics<cr>
 nnoremap <silent><F4> :call VimuxRunLastCommand()<CR>
 nnoremap <silent><F5> :call VimuxRunCommand("bundle exec rspec " . bufname("%") . ":" . line("."))<CR>
 nnoremap <silent><F6> :call VimuxRunCommand("bundle exec rspec " . bufname("%"))<CR>
@@ -168,7 +174,6 @@ nnoremap <silent><F8> :call VimuxRunCommand("rubocop " . bufname("%"))<CR>
 nnoremap <silent><leader>. :Lines<cr>
 nnoremap <silent><leader>bl :BLines<cr>
 nnoremap <silent><leader>hl :nohlsearch<CR>
-nnoremap gr :VimuxPromptCommand<cr>
 nnoremap <silent><M-j> zj
 nnoremap <silent><M-k> zk
 
@@ -212,8 +217,3 @@ let g:python3_host_prog = "/usr/bin/python3"
 let g:ruby_host_prog = '~/.asdf/shims/neovim-ruby-host'
 let g:terraform_binary_path="~/.asdf/shims/terraform"
 let g:terraform_fmt_on_save=1
-
-nnoremap <c-p> <cmd>Telescope find_files<cr>
-nnoremap <c-t> <cmd>Telescope live_grep<cr>
-nnoremap <c-s> <cmd>Telescope buffers<cr>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
