@@ -1,5 +1,4 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Mofiqul/vscode.nvim'
 Plug 'alvan/vim-closetag'
 Plug 'andymass/vim-matchup'
 Plug 'christoomey/vim-tmux-navigator'
@@ -9,8 +8,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jremmen/vim-ripgrep'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'neoclide/vim-jsx-improve'
 Plug 'preservim/nerdtree'
-Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
@@ -21,18 +21,42 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-ruby/vim-ruby', {  'for': 'ruby' }
 Plug 'wakatime/vim-wakatime'
 Plug 'preservim/vimux'
-Plug 'chriskempson/base16-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'ms-jpq/coq_nvim', { 'branch': 'coq' }
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+Plug 'Mofiqul/vscode.nvim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'martinsione/darkplus.nvim'
+Plug 'joshdick/onedark.vim'
+" Plug 'lifepillar/vim-solarized8'
+" Plug 'tanvirtin/monokai.nvim'
+" Plug 'chriskempson/base16-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+" Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 call plug#end()
 
-let g:coq_settings = { 'auto_start': v:true }
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> K :call ShowDocumentation()<CR>
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <f2> <Plug>(coc-rename)
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-solargraph',
+      \ 'coc-tsserver', 'coc-pairs', 'coc-git', 'coc-highlight', 'coc-emmet',
+      \ 'coc-snippets']
 
 filetype plugin on
 filetype indent on
@@ -61,37 +85,42 @@ set smartindent
 set clipboard=unnamedplus
 
 let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-      \ 'right': [ [ 'lineinfo' ],
-      \            [ 'percent' ],
-      \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'inactive': {
-      \ 'left': [ [ 'filename' ] ],
-      \ 'right': [ [ 'lineinfo' ],
-      \            [ 'percent' ] ] },
-      \ 'tabline': {
-      \ 'left': [ [ 'tabs' ] ],
-      \ 'right': [ [ 'close' ] ] },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
+      \   'active': {
+      \     'left': [ [ 'mode', 'paste' ],
+      \               [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   },
+      \   'inactive': {
+      \   'left': [ [ 'filename' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ] ] },
+      \   'enable': {
+      \     'tabline': 0
+      \   },
+      \   'component_function': {
+      \     'gitbranch': 'FugitiveHead'
+      \   },
+      \   'colorscheme': 'onedark',
+      \   'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \   'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
       \ }
 
+set termguicolors
 let g:vscode_style = "dark"
 let g:vscode_italic_comment = 1
 
 let g:rooter_patterns = ['.git', 'Gemfile.lock']
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme onedark
 
-colorscheme base16-default-dark
 set background=dark
-set termguicolors
 
 let g:mapleader = " "
 let g:maplocalleader = ','
 
+set linespace=0
 set autoindent
 set autoread
 set autowrite
@@ -115,7 +144,6 @@ set listchars+=precedes:<,extends:>
 set listchars=tab:◁∙▷,trail:∙,precedes:∙
 set modeline
 set modelines=3
-set mouse=a
 set nobackup
 set nocursorcolumn
 set nocursorline
@@ -125,7 +153,7 @@ set noshowmode
 set noswapfile
 set novisualbell
 set nowrap
-set number
+set nonumber
 set path=.,,app-*/**,components/**,apps/**,lib/**,app/**,domains/**,plugins/**,deprecated_modules/**,modules/**,lib/**,vendor/**
 set scrolloff=8
 set shiftround
@@ -133,7 +161,7 @@ set shiftwidth=2
 set shortmess+=cS
 set showcmd
 set showmatch
-set showtabline=1
+set showtabline=0
 set sidescroll=5
 set sidescrolloff=8
 set signcolumn=auto
@@ -197,17 +225,17 @@ fun! CleanTrailingSpaces()
   call setpos('.', save_cursor)
   call setreg('/', old_query)
 endfun
-autocmd BufWritePre * :call CleanTrailingSpaces()
 
+autocmd BufWritePre * :call CleanTrailingSpaces()
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
 autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
 autocmd TermOpen * startinsert
 
-au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=100, on_visual=true}
 
-" let g:fzf_buffers_jump = 1
+let g:fzf_buffers_jump = 1
 let g:go_doc_popup_window = 1
 let g:go_fmt_autosave = 1
 let g:go_imports_autosave = 1
