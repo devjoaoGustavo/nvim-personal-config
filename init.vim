@@ -23,21 +23,13 @@ Plug 'wakatime/vim-wakatime'
 Plug 'preservim/vimux'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'Mofiqul/vscode.nvim'
-Plug 'tomasiser/vim-code-dark'
-Plug 'martinsione/darkplus.nvim'
-Plug 'joshdick/onedark.vim'
-" Plug 'lifepillar/vim-solarized8'
-" Plug 'tanvirtin/monokai.nvim'
-" Plug 'chriskempson/base16-vim'
+Plug 'sainnhe/gruvbox-material'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-" Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 call plug#end()
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -48,6 +40,14 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
+set guifont=JetBrainsMono\ NF:h11
+
+" Right Click Context Menu (Copy-Cut-Paste)
+nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
+inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
+xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
+snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -61,7 +61,7 @@ let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-solargraph',
 filetype plugin on
 filetype indent on
 
-set completeopt=menu,menuone,noselect
+set completeopt+=menuone,noselect,longest
 
 syntax enable
 
@@ -97,23 +97,20 @@ let g:lightline = {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ] ] },
       \   'enable': {
-      \     'tabline': 0
+      \     'tabline': 1
       \   },
       \   'component_function': {
       \     'gitbranch': 'FugitiveHead'
       \   },
-      \   'colorscheme': 'onedark',
+      \   'colorscheme': 'gruvbox_material',
       \   'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
       \   'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
       \ }
 
 set termguicolors
-let g:vscode_style = "dark"
-let g:vscode_italic_comment = 1
 
 let g:rooter_patterns = ['.git', 'Gemfile.lock']
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme onedark
+colorscheme gruvbox-material
 
 set background=dark
 
@@ -131,7 +128,6 @@ set copyindent
 set expandtab
 set fillchars=stlnc:\ ,vert:┃,fold:-,diff:-
 set grepprg=rg\ -i\ -n\ -w\ --vimgrep\ $*
-set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175
 set hidden
 set history=500
 set hlsearch
@@ -161,7 +157,7 @@ set shiftwidth=2
 set shortmess+=cS
 set showcmd
 set showmatch
-set showtabline=0
+set showtabline=2
 set sidescroll=5
 set sidescrolloff=8
 set signcolumn=auto
@@ -209,7 +205,7 @@ nnoremap <silent><M-k> zk
 nnoremap <silent>gs :G<cr>
 nnoremap <silent>gb :G blame<cr>
 
-set guicursor+=a:blinkon0
+set guicursor=
 set history=500
 set listchars+=precedes:<,extends:>
 set scrolloff=0
