@@ -205,7 +205,7 @@ nnoremap <silent><M-k> zk
 nnoremap <silent>gs :G<cr>
 nnoremap <silent>gb :G blame<cr>
 
-set guicursor=
+" set guicursor=
 set history=500
 set listchars+=precedes:<,extends:>
 set scrolloff=0
