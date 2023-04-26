@@ -1,8 +1,12 @@
+-- Set lualine as statusline
+-- See `:help lualine.txt`
 require('lualine').setup {
   options = {
     globalstatus = true,
-    theme = 'gruvbox',
-    section_separators = { left = '', right = '' },
-    component_separators = { left = '', right = '' }
-  }
+    icons_enabled = false,
+    theme = 'gruvbox-material',
+    component_separators = '|',
+    section_separators = '',
+  },
 }
+
