@@ -4,7 +4,7 @@ require('lualine').setup {
   options = {
     globalstatus = true,
     icons_enabled = false,
-    theme = 'gruvbox-material',
+    theme = 'github_dark_default',
     component_separators = '|',
     section_separators = '',
   },

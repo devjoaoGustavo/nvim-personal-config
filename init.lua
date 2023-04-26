@@ -111,6 +111,14 @@ require('packer').startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
+  use({
+    'projekt0n/github-nvim-theme', tag = 'v0.0.7',
+    config = function()
+      require('github-theme').setup {}
+
+      -- vim.cmd('colorscheme github_dark')
+    end
+  })
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -168,10 +176,10 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 vim.api.nvim_set_keymap('t', '<esc>', '<C-\\><C-n>', { silent = true })
 vim.api.nvim_create_autocmd('TermOpen', { command = 'startinsert' })
 
--- vim.api.nvim_create_autocmd('BufWritePre', {
---   command = '!mix format %',
---   pattern = {"*.ex", "*.exs", "*.erl", "*.yrl", "*.xrl", "*.eex", "*.leex", "*.heex"}
--- })
+vim.api.nvim_create_autocmd('BufWritePre', {
+  command = 'lua vim.lsp.buf.format()',
+  pattern = {"*.ex", "*.exs", "*.erl", "*.yrl", "*.xrl", "*.eex", "*.leex", "*.heex"}
+})
 --
 -- Attempt to simulate CTRL_R on terminal mode
 -- vim.cmd [[tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi']]
@@ -206,7 +214,7 @@ vim.wo.signcolumn = 'yes'
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.o.background = 'dark'
-vim.cmd [[colorscheme gruvbox]]
+vim.cmd [[colorscheme github_dark_default]]
 
 vim.g.NERDTreeAutoDeleteBuffer = 1
 vim.g.NERDTreeMinimalMenu = 1
@@ -406,96 +414,9 @@ vim.api.nvim_set_keymap('n', 'gx', ':so ~/.config/nvim/init.lua<cr>', { noremap 
 
 vim.api.nvim_set_keymap('n', '<space><space>', '<c-^>', { noremap = true, silent = true })
 
--- BEGIN
--- vim.api.nvim_set_keymap('n', '<leader>n', ':DrexDrawerToggle<cr>', { silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>f', ':DrexDrawerFindFileAndFocus<cr>', { silent = true })
---     require('drex.config').configure {
--- 		icons = {
--- 			file_default = "",
--- 			dir_open = "",
--- 			dir_closed = "",
--- 			link = "",
--- 			others = "",
--- 		},
--- 		colored_icons = true,
--- 		hide_cursor = false,
--- 		hijack_netrw = true,
--- 		sorting = function(a, b)
--- 			local aname, atype = a[1], a[2]
--- 			local bname, btype = b[1], b[2]
---
--- 			local aisdir = atype == 'directory'
--- 			local bisdir = btype == 'directory'
---
--- 			if aisdir ~= bisdir then
--- 				return aisdir
--- 			end
---
--- 			return aname < bname
--- 		end,
--- 		drawer = {
--- 			default_width = 30,
--- 			window_picker = {
--- 				enabled = true,
--- 				labels = 'abcdefghijklmnopqrstuvwxyz',
--- 			},
--- 		},
--- 		disable_default_keybindings = false,
--- 		keybindings = {
--- 			['n'] = {
--- 				['v'] = 'V',
--- 				['l'] = { '<cmd>lua require("drex.elements").expand_element()<CR>', { desc = 'expand element' }},
--- 				['h'] = { '<cmd>lua require("drex.elements").collapse_directory()<CR>', { desc = 'collapse directory' }},
--- 				['<right>'] = { '<cmd>lua require("drex.elements").expand_element()<CR>', { desc = 'expand element' }},
--- 				['<left>']  = { '<cmd>lua require("drex.elements").collapse_directory()<CR>', { desc = 'collapse directory'}},
--- 				['<2-LeftMouse>'] = { '<LeftMouse><cmd>lua require("drex.elements").expand_element()<CR>', { desc = 'expand element' }},
--- 				['<RightMouse>']  = { '<LeftMouse><cmd>lua require("drex.elements").collapse_directory()<CR>', { desc = 'collapse directory' }},
--- 				['s'] = { '<cmd>lua require("drex.elements").open_file("vs")<CR>', { desc = 'open file in vsplit' }},
--- 				['i'] = { '<cmd>lua require("drex.elements").open_file("sp")<CR>', { desc = 'open file in split' }},
--- 				['t'] = { '<cmd>lua require("drex.elements").open_file("tabnew", true)<CR>', { desc = 'open file in new tab' }},
--- 				['C'] = { '<cmd>lua require("drex.elements").open_directory()<CR>', { desc = 'open directory in new buffer' }},
--- 				['U'] = { '<cmd>lua require("drex.elements").open_parent_directory()<CR>', { desc = 'open parent directory in new buffer' }},
--- 				['R'] = { '<cmd>lua require("drex").reload_directory()<CR>', { desc = 'reload' }},
--- 				['<c-j>'] = { '<cmd>lua require("drex.actions.jump").jump_to_next_sibling()<CR>', { desc = 'jump to next sibling' }},
--- 				['<c-k>'] = { '<cmd>lua require("drex.actions.jump").jump_to_prev_sibling()<CR>', { desc = 'jump to prev sibling' }},
--- 				['p'] = { '<cmd>lua require("drex.actions.jump").jump_to_parent()<CR>', { desc = 'jump to parent element' }},
--- 				['S'] = { '<cmd>lua require("drex.actions.stats").stats()<CR>', { desc = 'show element stats' }},
--- 				['ma'] = { '<cmd>lua require("drex.actions.files").create()<CR>', { desc = 'create element' }},
--- 				['md'] = { '<cmd>lua require("drex.actions.files").delete("line")<CR>', { desc = 'delete element' }},
--- 				['D'] = { '<cmd>lua require("drex.actions.files").delete("clipboard")<CR>', { desc = 'delete (clipboard)' }},
--- 				['mp'] = { '<cmd>lua require("drex.actions.files").copy_and_paste()<CR>', { desc = 'copy & paste (clipboard)' }},
--- 				['P'] = { '<cmd>lua require("drex.actions.files").cut_and_move()<CR>', { desc = 'cut & move (clipboard)' }},
--- 				['mr'] = { '<cmd>lua require("drex.actions.files").rename()<CR>', { desc = 'rename element' }},
--- 				['MR'] = { '<cmd>lua require("drex.actions.files").multi_rename("clipboard")<CR>', { desc = 'rename (clipboard)' }},
--- 				['/'] = { '<cmd>keepalt lua require("drex.actions.search").search()<CR>', { desc = 'search' }},
--- 				[',m'] = { '<cmd>DrexMark<CR>', { desc = 'mark element' }},
--- 				[',u'] = { '<cmd>DrexUnmark<CR>', { desc = 'unmark element' }},
--- 				[',,'] = { '<cmd>DrexToggle<CR>', { desc = 'toggle element' }},
--- 				['cc'] = { '<cmd>lua require("drex.clipboard").clear_clipboard()<CR>', { desc = 'clear clipboard' }},
--- 				['cs'] = { '<cmd>lua require("drex.clipboard").open_clipboard_window()<CR>', { desc = 'edit clipboard' }},
--- 				['y'] = { '<cmd>lua require("drex.actions.text").copy_name()<CR>', { desc = 'copy element name' }},
--- 				['Y'] = { '<cmd>lua require("drex.actions.text").copy_relative_path()<CR>', { desc = 'copy element relative path' }},
--- 				['<C-y>'] = { '<cmd>lua require("drex.actions.text").copy_absolute_path()<CR>', { desc = 'copy element absolute path' }},
--- 			},
--- 			['v'] = {
--- 				['d'] = { ':lua require("drex.actions.files").delete("visual")<CR>', { desc = 'delete elements' }},
--- 				['r'] = { ':lua require("drex.actions.files").multi_rename("visual")<CR>', { desc = 'rename elements' }},
--- 				['M'] = { ':DrexMark<CR>', { desc = 'mark elements' }},
--- 				['u'] = { ':DrexUnmark<CR>', { desc = 'unmark elements' }},
--- 				['m'] = { ':DrexToggle<CR>', { desc = 'toggle elements' }},
--- 				['y'] = { ':lua require("drex.actions.text").copy_name(true)<CR>', { desc = 'copy element names' }},
--- 				['Y'] = { ':lua require("drex.actions.text").copy_relative_path(true)<CR>', { desc = 'copy element relative paths' }},
--- 				['<C-y>'] = { ':lua require("drex.actions.text").copy_absolute_path(true)<CR>', { desc = 'copy element absolute paths' }},
--- 			}
--- 		},
--- 		on_enter = nil,
--- 		on_leave = nil,
---     }
--- END
-
 vim.api.nvim_set_keymap('n', ',s', ':w<cr>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>hl', ':nohl<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>hf', ':!mix format %<cr>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>hf', ':lua vim.lsp.buf.format()<cr>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ht', ':!mix test %<cr>', { noremap = true, silent = false })
 -- vim.api.nvim_set_keymap('n', '<leader>ht', ':call VimuxRunCommand("mix test " . bufname("%"))<cr>', { noremap = true, silent = false })
 
