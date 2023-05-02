@@ -1,3 +1,5 @@
+local vim = vim
+
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
@@ -84,7 +86,7 @@ mason_lspconfig.setup_handlers {
   end,
 }
 --
--- vim.api.nvim_set_keymap('n', 'gd', ':Telescope coc definitions<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gd', ':Telescope coc definitions<cr>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', 'gt', ':Telescope coc type_definitions<cr>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', 'gi', ':Telescope coc implementations<cr>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', 'gs', ':Telescope coc document_symbols<cr>', {})

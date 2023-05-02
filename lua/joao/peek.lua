@@ -1,3 +1,4 @@
+local vim = vim
 local peek= require('peek')
 
 peek.setup({

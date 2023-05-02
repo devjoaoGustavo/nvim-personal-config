@@ -1,7 +1,5 @@
 local lib = require("telescope")
 
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
 lib.setup {
   defaults = {
     mappings = {
@@ -13,13 +11,10 @@ lib.setup {
   },
 }
 
--- Enable telescope fzf native, if installed
-pcall(lib.load_extension, 'fzf')
-
 lib.setup {
   defaults = {
     results_title = 'Results',
-    layout_strategy = 'center',
+    -- layout_strategy = 'center',
     layout_config = {
       height = 0.95,
       prompt_position = 'top',
@@ -37,4 +32,5 @@ lib.setup {
   }
 }
 
--- lib.load_extension('coc')
+pcall(lib.load_extension, 'fzf')
+lib.load_extension('coc')

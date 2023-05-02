@@ -1,3 +1,5 @@
+local vim = vim
+
 require('nvim-autopairs').setup {}
 require('Comment').setup()
 require('fidget').setup()
@@ -10,92 +12,99 @@ require('joao.peek')
 require('joao.keymaps')
 require('joao.coc')
 
-vim.opt.statusline= ''
-
-vim.opt.foldmethod = "syntax"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldminlines = 2
-vim.opt.foldlevelstart = 3
-
-vim.opt.guicursor = ''
-vim.opt.termguicolors = true
-vim.opt.conceallevel = 2
-vim.opt.linespace = 0
-vim.opt.autoindent = true
-vim.opt.autoread = true
-vim.opt.autowrite = true
-vim.opt.autowriteall = true
-vim.opt.clipboard = { "unnamedplus" }
-vim.opt.cmdheight = 1
-vim.opt.copyindent = true
-vim.opt.expandtab = true
+vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}")
+vim.o.backup = false
+vim.o.writebackup = false
+vim.o.updatetime = 300
+vim.o.signcolumn = "yes"
+vim.g.NERDTreeAutoDeleteBuffer = 1
+vim.g.NERDTreeCascadeSingleChildDir = 0
+vim.g.NERDTreeCreatePrefix = 'silent keepalt keepjumps'
+vim.g.NERDTreeMinimalMenu = 1
+vim.g.NERDTreeMinimalUI = 1
+vim.g.NERDTreeQuitOnOpen = 0
+vim.g.NERDTreeShowHidden = 0
+vim.g.plug_window = 'noautocmd vertical topleft new'
+vim.o.background = 'dark'
+vim.o.breakindent = true
+vim.o.hlsearch = true
+vim.o.ignorecase = true
+vim.o.mouse = ''
+vim.o.smartcase = true
+vim.o.termguicolors = true
+vim.o.undofile = true
+vim.o.updatetime = 250
+vim.o.autoindent = true
+vim.o.autoread = true
+vim.o.autowrite = true
+vim.o.autowriteall = true
+vim.o.backup = false
+vim.o.cindent = true
+vim.o.clipboard = 'unnamedplus'
+vim.o.cmdheight = 1
+vim.o.completeopt = 'menuone,noselect,longest'
+vim.o.conceallevel = 2
+vim.o.copyindent = true
+vim.o.cursorcolumn = false
+vim.o.cursorline = false
+vim.o.encoding = 'UTF-8'
+vim.o.expandtab = true
 vim.opt.fillchars = { stlnc = ' ', vert = '┃', fold = '-', diff = '-' }
-vim.opt.grepprg = "rg -i -n -w --vimgrep $*"
-vim.opt.hidden = true
-vim.opt.history = 500
-vim.opt.hlsearch = true
-vim.opt.ignorecase = true
-vim.opt.inccommand = nosplit
-vim.opt.incsearch = true
-vim.opt.laststatus = 3
-vim.opt.list = true
-vim.opt.listchars:append { precedes = '<', extends = '>' }
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldlevelstart = 3
+vim.o.foldmethod = "syntax"
+vim.o.foldminlines = 2
+vim.o.grepprg = "rg -i -n -w --vimgrep $*"
+vim.o.guicursor = ''
+vim.o.hidden = true
+vim.o.history = 500
+vim.o.hlsearch = true
+vim.o.ignorecase = true
+vim.o.inccommand = 'nosplit'
+vim.o.inccommand = nosplit
+vim.o.incsearch = true
+vim.o.joinspaces = false
+vim.o.laststatus = 3
+vim.o.linespace = 0
+vim.o.list = true
 vim.opt.listchars = { tab = '◁∙▷', trail = '∙', precedes = '∙' }
-vim.opt.modeline = true
-vim.opt.modelines = 3
-vim.opt.backup = false
-vim.opt.cursorline = false
-vim.opt.cursorcolumn = false
-vim.opt.joinspaces = false
-vim.opt.relativenumber = false
-vim.opt.showmode = false
-vim.opt.swapfile = false
-vim.opt.visualbell = false
-vim.opt.wrap = false
-vim.opt.number = true
+vim.opt.listchars:append { precedes = '<', extends = '>' }
+vim.o.magic = true
+vim.o.modeline = true
+vim.o.modelines = 3
+vim.o.mouse = 'a'
+vim.o.number = true
 vim.opt.path = { './**', '' }
-vim.opt.scrolloff=0
-vim.opt.shiftround = true
-vim.opt.shiftwidth=2
+vim.o.relativenumber = false
+vim.o.scrolloff=0
+vim.o.shiftround = true
+vim.o.shiftwidth=2
 vim.opt.shortmess:append { c = true, S = true }
-vim.opt.showcmd = true
-vim.opt.showmatch = true
-vim.opt.showtabline = 1
-vim.opt.sidescroll = 5
-vim.opt.sidescrolloff = 4
-vim.opt.signcolumn = 'auto'
-vim.opt.smartcase = true
-vim.opt.smartindent = true
-vim.opt.softtabstop = 2
-vim.opt.tabstop = 2
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+vim.o.showcmd = true
+vim.o.showmatch = true
+vim.o.showmode = false
+vim.o.showtabline = 1
+vim.o.sidescroll = 5
+vim.o.sidescrolloff = 4
+vim.o.signcolumn = 'auto'
+vim.o.smartcase = true
+vim.o.smartindent = true
+vim.o.softtabstop = 2
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.statusline= ''
+vim.o.swapfile = false
+vim.o.tabstop = 2
 vim.opt.tags:prepend { "./.git/tags" }
-vim.opt.title = true
-vim.opt.ttimeout = true
-vim.opt.timeoutlen = 300
-vim.opt.wildignore:append { "*/.git/*" , "*/.hg/*" , "*/.svn/*" , "*/.DS_Store" }
+vim.o.termguicolors = true
+vim.o.timeoutlen = 300
+vim.o.title = true
+vim.o.ttimeout = true
+vim.o.visualbell = false
 vim.opt.wildignore:append { "*.o" , "*~" , "*.pyc" }
-vim.opt.wildmenu = true
-vim.opt.wildmode = 'full'
-
-vim.opt.completeopt:append { 'menuone', 'noselect', 'longest' }
-
-vim.opt.magic = true
-vim.opt.cmdheight = 1
-vim.opt.mouse = 'a'
-vim.opt.inccommand = 'nosplit'
-vim.opt.encoding = 'UTF-8'
-vim.opt.copyindent = true
-vim.opt.clipboard = 'unnamedplus'
-
-vim.opt.cindent = true
-
-
-NERDTreeAutoDeleteBuffer = 1
-NERDTreeMinimalMenu = 1
-NERDTreeMinimalUI = 1
-NERDTreeQuitOnOpen = 1
-NERDTreeShowHidden = 0
-NERDTreeCascadeSingleChildDir = 0
-NERDTreeCreatePrefix='silent keepalt keepjumps'
+vim.opt.wildignore:append { "*/.git/*" , "*/.hg/*" , "*/.svn/*" , "*/.DS_Store" }
+vim.o.wildmenu = true
+vim.o.wildmode = 'full'
+vim.o.wrap = false
+vim.wo.number = true
+vim.wo.signcolumn = 'yes'
