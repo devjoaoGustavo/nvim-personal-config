@@ -2,23 +2,17 @@ local lib = require("telescope")
 
 lib.setup {
   defaults = {
+    -- results_title = 'Results',
+    -- layout_strategy = 'center',
+    -- layout_config = {
+    --   height = 0.95,
+    --   prompt_position = 'top',
+    -- },
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+        ["<esc>"] = require('telescope.actions').close,
       },
-    },
-  },
-}
-
-lib.setup {
-  defaults = {
-    results_title = 'Results',
-    -- layout_strategy = 'center',
-    layout_config = {
-      height = 0.95,
-      prompt_position = 'top',
-    },
+    }
   },
   pickers = {
     mappings = {
@@ -33,4 +27,5 @@ lib.setup {
 }
 
 pcall(lib.load_extension, 'fzf')
-lib.load_extension('coc')
+pcall(lib.load_extension('coc'))
+-- lib.load_extension('projects')

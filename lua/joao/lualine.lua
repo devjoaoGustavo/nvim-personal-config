@@ -1,13 +1,13 @@
 require('lualine').setup {
   options = {
-    globalstatus = true,
+    globalstatus = false,
     icons_enabled = false,
-    theme = 'github_dark_default',
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
+    theme = 'auto',
+    component_separators = { left = nil, right = nil },
+    section_separators = { left = nil, right = nil },
   },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = { { 'mode', fmt = function(str) return str:sub(1,1) end, separator = { left = '', right = nil} } },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
     lualine_c = {
       {
@@ -30,12 +30,8 @@ require('lualine').setup {
         }
       }
     },
-    lualine_x = { 'encoding', 'fileformat', 'filetype', {
-      require("noice").api.statusline.mode.get,
-      cond = require("noice").api.statusline.mode.has,
-      color = { fg = "#ff9e64" },
-    } },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
-    lualine_z = { 'location' }
+    lualine_z = { { 'location', separator = { left = nil, right = ''} } }
   },
 }
