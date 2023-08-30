@@ -1,5 +1,5 @@
 {
-  "elixir.pathToElixirLS": "/opt/homebrew/bin/elixir-ls",
+  "elixir.pathToElixirLS": "~/.local/share/nvim/site/pack/packer/start/coc-elixir/els-release/language_server.sh",
   "snippets.ultisnips.pythonPrompt": false,
   "languageserver": {
     "terraform": {
@@ -12,5 +12,7 @@
       "initializationOptions": {},
       "settings": {}
     }
-  }
+  },
+  "zig.zls.path": "/Users/joao/.config/coc/extensions/coc-zls-data/zls_install/zls",
+  "zig.zls.enabled": true
 }

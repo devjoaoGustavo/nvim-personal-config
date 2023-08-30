@@ -2,7 +2,7 @@
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'elixir', 'erlang', 'go', 'lua', 'markdown', 'rust', 'ruby', 'help', },
+  ensure_installed = { 'elixir', 'erlang', 'go', 'lua', 'markdown', 'rust', 'ruby', 'zig', 'terraform' },
 
   highlight = { enable = true },
   indent = { enable = true },

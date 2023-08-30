@@ -2,62 +2,33 @@ local vim = vim
 
 local keyset = vim.keymap.set
 
--- Autocomplete
--- function _G.check_back_space()
---     local col = vim.fn.col('.') - 1
---     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
--- end
+  -- • |<Plug>(coc-definition)|
+  -- • |<Plug>(coc-declaration)|
+  -- • |<Plug>(coc-implementation)|
+  -- • |<Plug>(coc-type-definition)|
+  -- • |<Plug>(coc-references)|
+  -- • |<Plug>(coc-references-used)|
 
-local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
--- keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
--- keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
--- keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
--- keyset("i", "<c-space>", "coc#refresh()", { silent = true, expr = true })
--- keyset("n", "[g", "<Plug>(coc-diagnostic-prev)", { silent = true })
--- keyset("n", "]g", "<Plug>(coc-diagnostic-next)", { silent = true })
--- keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
-keyset("n", "gu", "<Plug>(coc-type-definition)", { silent = true })
--- keyset("n", "gi", "<Plug>(coc-implementation)", {silent = true})
--- keyset("n", "gr", "<Plug>(coc-references)", {silent = true})
+local opts = { silent = true, noremap = true }
+keyset("n", "\\d", "<cmd>call CocActionAsync('jumpDefinition')<cr>", opts)
+keyset("n", "\\r", "<cmd>call CocAction('jumpUsed')<cr>", opts)
+keyset('n', '\\s', '<cmd>Telescope coc document_symbols<cr>', opts)
+keyset("n", "\\a", "<cmd>call CocAction('codeAction')<cr>", opts)
 
--- Use K to show documentation in preview window
-function _G.show_docs()
-  local cw = vim.fn.expand('<cword>')
-  if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
-    vim.api.nvim_command('h ' .. cw)
-  elseif vim.api.nvim_eval('coc#rpc#ready()') then
-    vim.lsp.buf.hover('doHover')
-  else
-    vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
-  end
-end
-
-keyset("n", "K", _G.show_docs, { silent = true })
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client.server_capabilities.hoverProvider then
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
+    end
+    if client.server_capabilities.definitionProvider then
+      vim.bo[args.buf].tagfunc = "CocTagFunc"
+    end
+  end,
+})
 
 -- Highlight the symbol and its references on a CursorHold event(cursor is idle)
 vim.api.nvim_create_augroup("CocGroup", {})
--- vim.api.nvim_create_autocmd("CursorHold", {
---     group = "CocGroup",
---     command = "silent call CocActionAsync('highlight')",
---     desc = "Highlight symbol under cursor on CursorHold"
--- })
-
--- Symbol renaming
--- keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
-
--- Formatting selected code
-keyset("x", "<leader>=", "<Plug>(coc-format-selected)", { silent = true })
-keyset("n", "<leader>=", "<Plug>(coc-format-selected)", { silent = true })
-
--- Setup formatexpr specified filetype(s)
-vim.api.nvim_create_autocmd("FileType", {
-  group = "CocGroup",
-  pattern = "typescript,json",
-  command = "setl formatexpr=CocAction('formatSelected')",
-  desc = "Setup formatexpr specified filetype(s)."
-})
-
--- Update signature help on jump placeholder
 vim.api.nvim_create_autocmd("User", {
   group = "CocGroup",
   pattern = "CocJumpPlaceholder",
@@ -70,33 +41,33 @@ keyset("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
 keyset("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
 
 -- Remap keys for apply code actions at the cursor position.
-keyset("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", opts)
+-- keyset("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", opts)
 -- Remap keys for apply code actions affect whole buffer.
-keyset("n", "<leader>as", "<Plug>(coc-codeaction-source)", opts)
+-- keyset("n", "<leader>as", "<Plug>(coc-codeaction-source)", opts)
 -- Remap keys for applying codeActions to the current buffer
-keyset("n", "<leader>ac", "<Plug>(coc-codeaction)", opts)
+-- keyset("n", "<leader>ac", "<Plug>(coc-codeaction)", opts)
 -- Apply the most preferred quickfix action on the current line.
-keyset("n", "<leader>qf", "<Plug>(coc-fix-current)", opts)
+-- keyset("n", "<leader>qf", "<Plug>(coc-fix-current)", opts)
 
 -- Remap keys for apply refactor code actions.
-keyset("n", "<leader>re", "<Plug>(coc-codeaction-refactor)", { silent = true })
-keyset("x", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
-keyset("n", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
+-- keyset("n", "<leader>re", "<Plug>(coc-codeaction-refactor)", { silent = true })
+-- keyset("x", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
+-- keyset("n", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
 
 -- Run the Code Lens actions on the current line
-keyset("n", "<leader>cl", "<Plug>(coc-codelens-action)", opts)
-
+-- keyset("n", "<leader>cl", "<Plug>(coc-codelens-action)", opts)
+--
 
 -- Map function and class text objects
 -- NOTE: Requires 'textDocument.documentSymbol' support from the language server
--- keyset("x", "if", "<Plug>(coc-funcobj-i)", opts)
--- keyset("o", "if", "<Plug>(coc-funcobj-i)", opts)
--- keyset("x", "af", "<Plug>(coc-funcobj-a)", opts)
--- keyset("o", "af", "<Plug>(coc-funcobj-a)", opts)
--- keyset("x", "ic", "<Plug>(coc-classobj-i)", opts)
--- keyset("o", "ic", "<Plug>(coc-classobj-i)", opts)
--- keyset("x", "ac", "<Plug>(coc-classobj-a)", opts)
--- keyset("o", "ac", "<Plug>(coc-classobj-a)", opts)
+keyset("x", "if", "<Plug>(coc-funcobj-i)", opts)
+keyset("o", "if", "<Plug>(coc-funcobj-i)", opts)
+keyset("x", "af", "<Plug>(coc-funcobj-a)", opts)
+keyset("o", "af", "<Plug>(coc-funcobj-a)", opts)
+keyset("x", "ic", "<Plug>(coc-classobj-i)", opts)
+keyset("o", "ic", "<Plug>(coc-classobj-i)", opts)
+keyset("x", "ac", "<Plug>(coc-classobj-a)", opts)
+keyset("o", "ac", "<Plug>(coc-classobj-a)", opts)
 
 
 -- Remap <C-f> and <C-b> to scroll float windows/popups
@@ -114,8 +85,8 @@ keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', o
 
 -- Use CTRL-S for selections ranges
 -- Requires 'textDocument/selectionRange' support of language server
--- keyset("n", "<C-s>", "<Plug>(coc-range-select)", { silent = true })
--- keyset("x", "<C-s>", "<Plug>(coc-range-select)", { silent = true })
+keyset("n", "<C-s>", "<Plug>(coc-range-select)", { silent = true })
+keyset("x", "<C-s>", "<Plug>(coc-range-select)", { silent = true })
 
 
 -- Add `:Format` command to format current buffer
@@ -154,17 +125,15 @@ keyset("n", "<space>p", ":<C-u>CocListResume<cr>", opts)
 
 vim.g.coc_global_extensions = {
   'coc-json',
-  -- 'coc-git',
+  'coc-git',
   'coc-solargraph',
-  -- 'coc-tsserver',
-  'coc-pairs',
-  -- 'coc-git',
-  -- 'coc-highlight',
   'coc-emmet',
   'coc-elixir',
-  -- 'coc-snippets',
   'coc-rust-analyzer',
   'coc-lua',
   'coc-prettier',
-  'coc-go'
+  'coc-go',
+  'coc-zls',
+  'coc-tsserver'
 }
+

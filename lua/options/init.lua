@@ -1,16 +1,19 @@
 local vim = vim
 
-vim.g.NERDTreeAutoDeleteBuffer = 1
-vim.g.NERDTreeCascadeSingleChildDir = 0
-vim.g.NERDTreeCreatePrefix = 'silent keepalt keepjumps'
-vim.g.NERDTreeMinimalMenu = 1
-vim.g.NERDTreeMinimalUI = 1
-vim.g.NERDTreeQuitOnOpen = 0
-vim.g.NERDTreeShowHidden = 0
-vim.g.NERDTreeStatusline = ''
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.o.termguicolors = true
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
-vim.g.plug_window = 'noautocmd vertical topleft new'
+
+-- vim.g.netrw_banner = 0
+-- vim.g.netrw_liststyle = 0
+-- vim.g.netrw_hide = 1
+-- vim.g.netrw_browse_split = 0
+--
+-- vim.g.plug_window = 'noautocmd vertical topleft new'
 vim.o.autoindent = true
 vim.o.autoread = true
 vim.o.autowrite = true
@@ -28,7 +31,7 @@ vim.o.cursorline = false
 vim.o.encoding = 'UTF-8'
 vim.o.expandtab = true
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldlevelstart = 1
+vim.o.foldlevelstart = 94
 vim.o.foldmethod = "expr"
 vim.o.foldminlines = 1
 vim.o.grepprg = "rg -i -n -w --vimgrep $*"
@@ -39,7 +42,7 @@ vim.o.ignorecase = true
 vim.o.inccommand = 'nosplit'
 vim.o.incsearch = true
 vim.o.joinspaces = false
-vim.o.laststatus = 2
+vim.o.laststatus = 3
 vim.o.linespace = 0
 vim.o.list = true
 vim.o.magic = true
@@ -49,12 +52,12 @@ vim.o.mouse = ''
 vim.o.mouse = 'a'
 vim.o.number = true
 vim.o.relativenumber = false
-vim.o.scrolloff=0
+vim.o.scrolloff=10
 vim.o.shiftround = true
 vim.o.shiftwidth=2
 vim.o.showcmd = true
 vim.o.showmatch = true
-vim.o.showmode = false
+vim.o.showmode = true
 vim.o.showtabline = 1
 vim.o.sidescroll = 5
 vim.o.sidescrolloff = 4
@@ -62,11 +65,10 @@ vim.o.signcolumn = 'no'
 vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.softtabstop = 2
-vim.o.splitbelow = false
-vim.o.splitright = false
+vim.o.splitbelow = true
+vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.tabstop = 2
-vim.o.termguicolors = true
 vim.o.timeoutlen = 300
 vim.o.title = true
 vim.o.ttimeout = true
@@ -83,4 +85,19 @@ vim.opt.path = { './**', '' }
 vim.opt.shortmess:append { c = true, S = true }
 vim.opt.tags:prepend { "./.git/tags" }
 vim.opt.wildignore:append { "*.o" , "*~" , "*.pyc", "*/.git/*" , "*/.hg/*" , "*/.svn/*" , "*/.DS_Store" }
--- vim.cmd('set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50')
+-- vim.o.guicursor = '' -- cursor always as Block
+-- vim.cmd('set guicursor=n-v-c:block,i-ci-ve:ver50,r-cr:hor20,o:hor50')
+
+vim.cmd[[
+let g:copilot_filetypes = {
+      \ '*': v:false,
+      \ 'lua': v:true,
+      \ 'rust': v:true,
+      \ 'elixir': v:true,
+      \ 'erlang': v:true,
+      \ 'ruby': v:true,
+      \ 'ocaml': v:true,
+      \ }
+]]
+
+vim.g.mix_format_on_save  = true

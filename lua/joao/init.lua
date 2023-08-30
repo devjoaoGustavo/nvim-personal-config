@@ -1,14 +1,11 @@
-local vim = vim
-
-require('nvim-autopairs').setup {}
+-- require('nvim-autopairs').setup {}
 require('Comment').setup()
-require('fidget').setup()
+-- require('fidget').setup()
 
 require('joao.coc')
 require('joao.diagnostic')
 require('joao.keymaps')
-require('joao.lsp')
-require('joao.lualine')
+-- require('joao.lualine')
 -- require('joao.noice')
 -- require('joao.peek')
 -- require('joao.rooter')
