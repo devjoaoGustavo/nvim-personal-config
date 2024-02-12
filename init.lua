@@ -1,3 +1,5 @@
+local vim = vim
+
 require('core.vim_options')
 
 -- stdpath('data') is ~/.local/share/nvim by default
@@ -20,6 +22,6 @@ require('core')
 require('core.lsp-config')
 
 -- setup must be called before loading
-vim.cmd.colorscheme "gruvbox"
+vim.cmd.colorscheme "melange"
 
 -- vim: ts=2 sts=2 sw=2
