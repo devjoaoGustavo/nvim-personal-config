@@ -1,36 +1,7 @@
 {
     "workspace.library": [
         "/Users/joao/.config/nvim",
-        "/Users/joao/.config/nvim/pack/packer/opt/packer.nvim",
         "/Users/joao/.local/share/nvim/site",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/boo-colorscheme-nvim",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/Comment.nvim",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/copilot.vim",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/gruvbox-material",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/lualine.nvim",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/lush.nvim",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/mellifluous.nvim",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/moonfly",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/plenary.nvim",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/telescope.nvim",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-fugitive",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-github-link",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-prettier",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-repeat",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-ripgrep",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-sensible",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-surround",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-terraform",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-unimpaired",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/vim-wakatime",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/zig.vim",
-        "/opt/homebrew/Cellar/neovim/HEAD-bf52fb7/share/nvim/runtime",
-        "/Users/joao/.local/share/nvim/site/pack/packer/start/moonfly/after",
-        "${3rd}/luassert/library"
+        "/opt/homebrew/Cellar/neovim/HEAD-bf52fb7/share/nvim/runtime"
     ]
 }

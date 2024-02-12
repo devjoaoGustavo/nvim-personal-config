@@ -1,17 +1,6 @@
 local vim = vim
 
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | silent! LspRestart | PackerCompile',
-  group = vim.api.nvim_create_augroup('Packer', { clear = true }),
-  pattern = vim.fn.expand '$MYVIMRC'
-})
 vim.api.nvim_create_autocmd('TermOpen', { command = 'startinsert' })
--- vim.api.nvim_create_autocmd('BufWritePost',
---   {
---     command = [[silent :!mix format %]],
---     group = vim.api.nvim_create_augroup('BufWritePostGroup', { clear = true }),
---     pattern = { "*.ex", "*.exs", "*.erl", "*.yrl", "*.xrl", "*.eex", "*.leex", "*.heex" },
---   })
 vim.api.nvim_create_autocmd('BufWritePre', { pattern = { "*" }, command = [[%s/\s\+$//e]] })
 vim.api.nvim_create_autocmd('TextYankPost',
   {
