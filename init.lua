@@ -23,6 +23,6 @@ require("lazy").setup("plugins")
 require('core.lsp-config')
 
 -- setup must be called before loading
-vim.cmd.colorscheme "melange"
+vim.cmd.colorscheme "gruvbox"
 
 -- vim: ts=2 sts=2 sw=2

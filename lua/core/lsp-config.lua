@@ -20,6 +20,7 @@ lspconfig.rust_analyzer.setup {
   },
 }
 lspconfig.terraformls.setup {}
+lspconfig.clangd.setup {}
 
 
 -- Global mappings.
