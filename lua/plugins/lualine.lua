@@ -11,7 +11,7 @@ return {
         sections = {
           lualine_a = {'mode'},
           lualine_b = {},
-          lualine_c = {{ 'filename', path = 0 }, 'location'},
+          lualine_c = {'location'},
           lualine_x = {'encoding', 'fileformat'},
           lualine_y = {'progress'},
           lualine_z = {'filetype'}

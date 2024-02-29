@@ -1,7 +1,3 @@
-local vim = vim
-
-vim.g.loaded_netrw = 0
-vim.g.loaded_netrwPlugin = 0
 vim.o.termguicolors = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
@@ -11,7 +7,7 @@ vim.o.autoread = true
 vim.o.autowrite = true
 vim.o.autowriteall = true
 vim.o.backup = false
-vim.o.breakindent = true
+vim.o.breakindent = false
 vim.o.cindent = true
 vim.o.clipboard = 'unnamedplus'
 vim.o.cmdheight = 1
@@ -40,7 +36,7 @@ vim.o.modeline = true
 vim.o.modelines = 3
 vim.o.mousescroll = "ver:1,hor:3"
 vim.o.number = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.o.scrolloff = 5
 vim.o.shiftround = true
 vim.o.showcmd = true
@@ -49,6 +45,7 @@ vim.o.showmode = false
 vim.o.sidescroll = 5
 vim.o.sidescrolloff = 4
 vim.o.signcolumn = 'auto'
+vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.splitbelow = true
@@ -62,15 +59,16 @@ vim.o.updatetime = 250
 vim.o.visualbell = false
 vim.o.wildmenu = true
 vim.o.wildmode = 'full'
+vim.o.syntax = 'off'
 vim.o.wrap = false
 vim.o.writebackup = false
 vim.opt.fillchars = { stlnc = ' ', vert = '┃', fold = '-', diff = '-' }
 vim.opt.listchars = { tab = '◁∙▷', trail = '∙', precedes = '<', extends = '>' }
--- vim.o.path = '.,**,,'
+vim.o.path = '.,**/*,,'
 vim.opt.shortmess:append { c = true, S = false }
 vim.opt.tags:prepend { "./.git/tags" }
 vim.opt.wildignore:append { "*.o" , "*~" , "*.pyc", "*/.git/*" , "*/.hg/*" , "*/.svn/*" , "*/.DS_Store" }
 
 -- set tabwidth to 2 for elixir and lua
 vim.cmd[[autocmd FileType elixir setlocal cc=99]]
-vim.cmd[[autocmd FileType elixir,lua,terraform setlocal softtabstop=2 tabstop=2 shiftwidth=2]]
+vim.cmd[[autocmd FileType elixir,markdown,json,lua,terraform setlocal softtabstop=2 tabstop=2 shiftwidth=2]]

@@ -5,22 +5,8 @@ return {
   branch = '0.1.x',
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()
-    local lib = require("telescope")
-    local actions = require('telescope.actions')
     local builtin = require('telescope.builtin')
 
-    lib.setup {
-      defaults = {
-        mappings = {
-          i = {
-            ["<esc>"] = actions.close,
-          },
-        }
-      },
-      extensions = {}
-    }
-
-    pcall(lib.load_extension, 'fzf_native')
     -- pcall(lib.load_extension('coc'))
     -- pcall(lib.load_extension('file_browser'))
     -- lib.load_extension('projects')

@@ -1,10 +1,8 @@
 return {
   "nvim-treesitter/nvim-treesitter-textobjects",
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter"
-  },
+  lazy = true,
   config = function()
-    require'nvim-treesitter.configs'.setup {
+    require 'nvim-treesitter.configs'.setup {
       textobjects = {
         move = {
           enable = true,
@@ -70,7 +68,7 @@ return {
           -- mapping query_strings to modes.
           selection_modes = {
             ['@parameter.outer'] = 'v', -- charwise
-            ['@function.outer'] = 'V', -- linewise
+            ['@function.outer'] = 'V',  -- linewise
             ['@class.outer'] = '<c-v>', -- blockwise
           },
           -- If you set this to `true` (default is `false`) then any textobject is
@@ -84,6 +82,18 @@ return {
           -- and should return true of false
           include_surrounding_whitespace = true,
         },
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
+            ["<leader>nm"] = "@function.outer",  -- swap function with next
+          },
+          swap_previous = {
+            ["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
+            ["<leader>pm"] = "@function.outer",  -- swap function with previous
+          },
+        },
+
       },
     }
   end
