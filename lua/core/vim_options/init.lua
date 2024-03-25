@@ -1,6 +1,6 @@
 vim.o.termguicolors = true
 vim.g.mapleader = ' '
-vim.g.maplocalleader = '\\'
+vim.g.maplocalleader = ' '
 vim.o.background = 'dark'
 vim.o.autoindent = true
 vim.o.autoread = true
@@ -18,9 +18,9 @@ vim.o.cursorcolumn = false
 vim.o.cursorline = false
 vim.o.encoding = 'UTF-8'
 vim.o.expandtab = true
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldexpr = "<cmd>Fold<cr>"
 vim.o.foldlevelstart = 94
-vim.o.foldmethod = "expr"
+vim.o.foldmethod = "indent"
 vim.o.foldminlines = 1
 vim.o.grepprg = "rg -i -n -w --vimgrep $*"
 vim.o.hidden = true
@@ -68,7 +68,8 @@ vim.o.path = '.,**/*,,'
 vim.opt.shortmess:append { c = true, S = false }
 vim.opt.tags:prepend { "./.git/tags" }
 vim.opt.wildignore:append { "*.o" , "*~" , "*.pyc", "*/.git/*" , "*/.hg/*" , "*/.svn/*" , "*/.DS_Store" }
+vim.opt.tagfunc = 'CocTagFunc'
 
 -- set tabwidth to 2 for elixir and lua
-vim.cmd[[autocmd FileType elixir setlocal cc=99]]
+-- vim.cmd[[autocmd FileType elixir setlocal cc=99]]
 vim.cmd[[autocmd FileType elixir,markdown,json,lua,terraform setlocal softtabstop=2 tabstop=2 shiftwidth=2]]

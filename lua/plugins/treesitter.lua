@@ -2,16 +2,14 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ":TSUpdate",
   event = { "BufReadPre", "BufNewFile" },
+  opts = {},
   config = function()
     require 'nvim-treesitter.configs'.setup {
       ensure_installed = {
-        'lua', 'elixir', 'javascript', 'typescript', 'html', 'css', 'json', 'yaml', 'toml', 'ruby',
-        'terraform', 'rust', 'go', 'bash', 'vim', 'vimdoc', 'python'
+        'lua', 'elixir', 'javascript', 'typescript', 'html', 'css', 'json', 'yaml', 'toml', 'ruby', 'terraform', 'rust', 'go', 'bash', 'vim', 'vimdoc', 'python'
       },
       auto_install = true,
-      highlight = { enable = false },
-      additional_vim_regex_highlighting = false,
-      textobjects = { enable = true },
+      highlight = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -22,8 +20,5 @@ return {
         },
       },
     }
-  end,
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  },
+  end
 }

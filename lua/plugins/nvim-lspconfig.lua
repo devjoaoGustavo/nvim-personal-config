@@ -22,7 +22,14 @@ return {
       cmd = { 'elixir-ls' },
       filetypes = { 'elixir', 'eelixir', 'eex', 'heex' },
       root_dir = lspconfig.util.root_pattern('mix.exs', '.git'),
+      settings = {
+        elixirLS = {
+          dialyzerEnabled = false,
+          fetchDeps = true,
+        },
+      },
     }
+    lspconfig.gopls.setup {}
     lspconfig.pyright.setup {}
     lspconfig.tsserver.setup {}
     lspconfig.rust_analyzer.setup {
@@ -71,26 +78,6 @@ return {
           vim.lsp.buf.format { async = true }
         end, opts)
       end,
-    })
-
-    local prettier = require("prettier")
-
-    prettier.setup({
-      bin = 'prettier',     -- or `'prettierd'` (v0.23.3+)
-      filetypes = {
-        "css",
-        "graphql",
-        "html",
-        "javascript",
-        "javascriptreact",
-        "json",
-        "less",
-        "markdown",
-        "scss",
-        "typescript",
-        "typescriptreact",
-        "yaml",
-      },
     })
   end
 }
