@@ -3,5 +3,9 @@
         "/Users/joao/.config/nvim",
         "/Users/joao/.local/share/nvim/site",
         "/opt/homebrew/Cellar/neovim/HEAD-bf52fb7/share/nvim/runtime"
+    ],
+    "diagnostics.globals": [
+        "vim",
+        "_timers"
     ]
 }

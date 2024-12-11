@@ -1,8 +1,8 @@
 return {
-  'MunifTanjim/prettier.nvim',
-  run = 'yarn install',
+  'prettier/vim-prettier',
+  run = 'yarn install --frozen-lockfile --production',
   opts = {
-    bin = 'prettier',   -- or `'prettierd'` (v0.23.3+)
+    bin = 'prettierd',   -- or `'prettierd'` (v0.23.3+)
     filetypes = {
       "css",
       "graphql",
@@ -15,7 +15,11 @@ return {
       "scss",
       "typescript",
       "typescriptreact",
+      "toml",
       "yaml",
+      "yml",
     },
   },
+  config = function()
+  end
 }
