@@ -1,2 +1,5 @@
 require("config.lazy")
 require('core')
+require('config')
+vim.keymap.set('n', '<space><space>x', ':%lua<cr>', opts)
+vim.keymap.set('v', '<space>x', ':lua<cr>', opts)

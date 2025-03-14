@@ -6,23 +6,14 @@ return {
   config = function()
     require 'nvim-treesitter.configs'.setup {
       ensure_installed = {
-        'bash',
-        'css',
         'elixir',
-        'go',
         'html',
-        'javascript',
         'json',
         'lua',
-        'python',
-        'regex',
         'ruby',
         'terraform',
-        'toml',
-        'typescript',
         'vim',
         'vimdoc',
-        'yaml',
       },
       auto_install = true,
       highlight = { enable = true },

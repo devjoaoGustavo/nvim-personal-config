@@ -18,8 +18,9 @@ return {
       vim.keymap.set('n', 'l', api.node.open.edit, opts('open'))
       vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
     end
-    require('nvim-tree').setup({
-      on_attach = my_on_attach,
-    })
+
+    require('nvim-tree').setup({ on_attach = my_on_attach, })
+    vim.keymap.set("n", "<leader>n", function() require("nvim-tree.api").tree.toggle({ find_file = true }) end,
+      { silent = true, noremap = true, desc = 'NvimTree: Toggle' })
   end
 }

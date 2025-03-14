@@ -24,23 +24,24 @@ return {
       },
       sections = {
         lualine_a = { { 'mode', fmt = function(str) return str:sub(1, 1) end } },
-        lualine_b = { 'branch' },
+        lualine_b = {},
         lualine_c = { { 'filename', path = 1 } },
         lualine_x = { 'encoding', 'fileformat' },
-        lualine_y = { 'progress', 'location' },
+        lualine_y = { 'location' },
         lualine_z = { 'filetype' }
       },
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
         lualine_c = { 'filename' },
-        lualine_x = { 'location' },
+        lualine_x = {},
         lualine_y = {},
         lualine_z = {}
       },
       tabline = {
         -- lualine_a = {},
-        lualine_a = {
+        lualine_a = { 'branch' },
+        lualine_b = {
           {
             'tabs',
             mode = 2,
@@ -49,7 +50,6 @@ return {
             use_mode_colors = true
           }
         },
-        lualine_b = {},
         lualine_c = {
           'navic',
           color_correction = nil,

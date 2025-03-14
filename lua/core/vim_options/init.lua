@@ -7,6 +7,7 @@ if vim.filetype.match({ buf = vim.fn.bufnr() }) == 'ruby' then
 end
 
 vim.opt.termguicolors = true
+vim.opt.verbose = 0
 vim.opt.background = 'dark'
 vim.opt.autoindent = true
 vim.opt.autoread = true
@@ -17,7 +18,7 @@ vim.opt.breakindent = false
 vim.opt.cindent = true
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.cmdheight = 1
-vim.opt.completeopt = 'preview,menuone,longest'
+vim.opt.completeopt = 'menu,longest,noinsert'
 vim.opt.conceallevel = 0
 vim.opt.copyindent = true
 vim.opt.cursorcolumn = false

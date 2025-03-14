@@ -17,7 +17,12 @@ return {
     telescope.setup({
       defaults = {
         layout_config = {
-          vertical = { width = 0.5, height = 0.4 }
+          -- vertical = { width = 0.5, height = 0.4 },
+          bottom_pane = {
+            height = 25,
+            preview_cutoff = 120,
+            prompt_position = "top"
+          },
         },
         mappings = {
           i = {
@@ -31,7 +36,9 @@ return {
           },
         }
       },
-      extensions = { 'fzf_native' },
+      extensions = {
+        fzf = {}
+      },
     })
 
     -- pcall(lib.load_extension('file_browser'))
@@ -46,14 +53,17 @@ return {
       { silent = true, noremap = true, desc = '[/] Fuzzily search in current buffer]' })
     vim.keymap.set('n', '<leader>?', builtin.oldfiles,
       { silent = true, noremap = true, desc = '[?] Find recently opened files' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers,
+    vim.keymap.set('n', '<leader>fb', builtin.buffers,
       { silent = true, noremap = true, desc = '[ ] Find existing buffers' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics,
+    vim.keymap.set('n', '<leader>fd', builtin.diagnostics,
       { silent = true, noremap = true, desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { silent = true, noremap = true, desc = '[S]earch [H]elp' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string,
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { silent = true, noremap = true, desc = '[S]earch [H]elp' })
+    vim.keymap.set('n', '<leader>fcw', builtin.grep_string,
       { silent = true, noremap = true, desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>bs', builtin.lsp_document_symbols,
+    vim.keymap.set('v', '<leader>fcw', builtin.grep_string,
+      { silent = true, noremap = true, desc = '[S]earch current [W]ord' })
+    vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols,
       { silent = true, noremap = true, desc = 'Search [B]uffer [S]symbols' })
+    vim.keymap.set('n', '<c-p>', builtin.find_files, { silent = true, noremap = true, desc = '[S]earch [F]iles' })
   end,
 }
