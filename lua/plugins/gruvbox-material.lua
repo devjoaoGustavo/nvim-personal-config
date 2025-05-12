@@ -8,6 +8,7 @@ return {
     vim.cmd [[
     let g:gruvbox_material_foreground = 'material'
     let g:gruvbox_material_background = 'hard'
+    let g:gruvbox_material_cursor = "red"
     let g:gruvbox_material_enable_bold = 1
     let g:gruvbox_material_enable_italic = 1
     let g:gruvbox_material_show_eob = 0

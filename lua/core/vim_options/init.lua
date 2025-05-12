@@ -24,6 +24,8 @@ vim.opt.copyindent = true
 vim.opt.cursorcolumn = false
 vim.opt.cursorline = true
 vim.opt.encoding = 'UTF-8'
+vim.opt.iminsert = 0
+vim.opt.imsearch = -1
 vim.opt.expandtab = true
 
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -48,7 +50,7 @@ vim.opt.modelines = 3
 vim.opt.mousescroll = "ver:1,hor:3"
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 3
 vim.opt.shiftround = true
 vim.opt.showcmd = true
 vim.opt.showmatch = true
@@ -89,7 +91,7 @@ if vim.filetype.match({ buf = vim.fn.bufnr() }) == 'elixir' then
 
   vim.cmd [[
       set cc=+1	  " highlight column after 'textwidth'
-      set cc=+1,+2,+3  " highlight three columns after 'textwidth'
+      " set cc=+1,+2,+3  " highlight three columns after 'textwidth'
       hi ColorColumn ctermbg=lightgrey guibg=lightgrey
   ]]
 end

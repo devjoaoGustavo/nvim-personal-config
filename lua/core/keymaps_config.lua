@@ -4,8 +4,7 @@ vim.keymap.set({ 'n', 'v' }, '<space>', '<Nop>', { silent = true })
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { silent = true })
 vim.keymap.set('n', '<esc><esc>', ':w!<cr>', { silent = true })
 vim.keymap.set('n', '<space>gb', ':G blame<cr>', { noremap = true, silent = true })
--- vim.keymap.set('n', '<space>ng', '<cmd>Neogit<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<space>cr', ':let @+ = expand("%")<cr>', { silent = true, noremap = true })
+vim.keymap.set('n', 'gy', ':let @+ = expand("%")<cr>', { silent = true, noremap = true })
 vim.keymap.set('n', '<leader>hl', vim.cmd.nohl, { silent = true })
 
 -- Vimux
@@ -24,6 +23,10 @@ vim.keymap.set('n', ']g', ':Gitsigns next_hunk<cr>', { silent = true })
 vim.keymap.set('n', '[g', ':Gitsigns prev_hunk<cr>', { silent = true })
 vim.keymap.set('n', '<space>gs', ':Gitsigns stage_hunk<cr>', { silent = true })
 vim.keymap.set('n', '<space>gh', ':Gitsigns toggle_linehl<cr>', { silent = true })
+
+-- Terminal
+vim.keymap.set('n', '<M-j>', '<cmd>15sp  term://zsh<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<M-k>', '<cmd>120vs term://zsh<cr>', { noremap = true, silent = true })
 
 local function print_at_cursor(text)
   -- Get the current buffer and window

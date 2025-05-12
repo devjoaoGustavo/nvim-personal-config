@@ -19,24 +19,28 @@ return {
         },
       }
 
-      function get_elixir_stdlib_dir()
-        -- Construct the Elixir command
-        local elixir_command = 'elixir -e ":code.lib_dir(:elixir) |> IO.puts()"'
+      lspconfig.clangd.setup {
+        capabilities = capabilities,
+      }
 
-        -- Execute the command and capture the output
-        local handle = io.popen(elixir_command)
-        if not handle then
-          return nil, "Failed to execute elixir command."
-        end
+      -- function get_elixir_stdlib_dir()
+      --   -- Construct the Elixir command
+      --   local elixir_command = 'elixir -e ":code.lib_dir(:elixir) |> IO.puts()"'
 
-        local result = handle:read("*a") -- Read all output
-        handle:close()
+      --   -- Execute the command and capture the output
+      --   local handle = io.popen(elixir_command)
+      --   if not handle then
+      --     return nil, "Failed to execute elixir command."
+      --   end
 
-        -- Remove trailing newline characters (if any)
-        result = result:gsub("[\n\r]+$", "")
+      --   local result = handle:read("*a") -- Read all output
+      --   handle:close()
 
-        return result
-      end
+      --   -- Remove trailing newline characters (if any)
+      --   result = result:gsub("[\n\r]+$", "")
+
+      --   return result
+      -- end
 
       lspconfig.elixirls.setup {
         capabilities = capabilities,
@@ -51,7 +55,24 @@ return {
             mixTarget = 'host',
             suggestSpecs = true,
             signatureAfterComplete = true,
-            stdlibSrcDir = get_elixir_stdlib_dir()
+            -- stdlibSrcDir = get_elixir_stdlib_dir()
+          },
+        },
+      }
+
+      lspconfig.gopls.setup {
+        capabilities = capabilities,
+        cmd = { 'gopls' },
+        settings = {
+          gopls = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            staticcheck = true,
+            analyses = {
+              unusedparams = true,
+              shadow = true,
+              fieldalignment = true,
+            },
           },
         },
       }

@@ -6,9 +6,11 @@ return {
   config = function()
     require 'nvim-treesitter.configs'.setup {
       ensure_installed = {
+        'c',
         'elixir',
         'html',
         'json',
+        'go',
         'lua',
         'ruby',
         'terraform',
@@ -28,6 +30,26 @@ return {
         },
       },
       textobjects = {
+        move = {
+          enable = true,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            ["]m"] = "@function.outer",
+            ["]]"] = "@class.outer",
+          },
+          goto_next_end = {
+            ["]M"] = "@function.outer",
+            ["]["] = "@class.outer",
+          },
+          goto_previous_start = {
+            ["[m"] = "@function.outer",
+            ["[["] = "@class.outer",
+          },
+          goto_previous_end = {
+            ["[M"] = "@function.outer",
+            ["[]"] = "@class.outer",
+          },
+        },
         select = {
           enable = true,
           lookahead = true,
@@ -64,7 +86,7 @@ return {
           -- * query_string: eg '@function.inner'
           -- * selection_mode: eg 'v'
           -- and should return true or false
-          include_surrounding_whitespace = true,
+          include_surrounding_whitespace = false,
         },
         swap = {
           enable = true,
