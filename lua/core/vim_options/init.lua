@@ -82,16 +82,11 @@ vim.opt.shortmess:append { c = true, S = false }
 vim.opt.tags:prepend { "./.git/tags" }
 vim.opt.wildignore:append { "*.o", "*~", "*.pyc", "*/.git/*", "*/.hg/*", "*/.svn/*", "*/.DS_Store" }
 
-if vim.filetype.match({ buf = vim.fn.bufnr() }) == 'elixir' then
-  vim.opt.shiftwidth = 2
-  vim.opt.softtabstop = 2
-  vim.opt.tabstop = 2
-  vim.opt.textwidth = 98
-  vim.opt.formatprg = "mix format %"
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.tabstop = 2
+vim.opt.textwidth = 98
 
-  vim.cmd [[
-      set cc=+1	  " highlight column after 'textwidth'
-      " set cc=+1,+2,+3  " highlight three columns after 'textwidth'
-      hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-  ]]
+if vim.filetype.match({ buf = vim.fn.bufnr() }) == 'elixir' then
+  vim.opt.formatprg = "mix format %"
 end

@@ -23,24 +23,24 @@ return {
         capabilities = capabilities,
       }
 
-      -- function get_elixir_stdlib_dir()
-      --   -- Construct the Elixir command
-      --   local elixir_command = 'elixir -e ":code.lib_dir(:elixir) |> IO.puts()"'
+      function get_elixir_stdlib_dir()
+        -- Construct the Elixir command
+        local elixir_command = 'elixir -e ":code.lib_dir(:elixir) |> IO.puts()"'
 
-      --   -- Execute the command and capture the output
-      --   local handle = io.popen(elixir_command)
-      --   if not handle then
-      --     return nil, "Failed to execute elixir command."
-      --   end
+        -- Execute the command and capture the output
+        local handle = io.popen(elixir_command)
+        if not handle then
+          return nil, "Failed to execute elixir command."
+        end
 
-      --   local result = handle:read("*a") -- Read all output
-      --   handle:close()
+        local result = handle:read("*a") -- Read all output
+        handle:close()
 
-      --   -- Remove trailing newline characters (if any)
-      --   result = result:gsub("[\n\r]+$", "")
+        -- Remove trailing newline characters (if any)
+        result = result:gsub("[\n\r]+$", "")
 
-      --   return result
-      -- end
+        return result
+      end
 
       lspconfig.elixirls.setup {
         capabilities = capabilities,
@@ -55,7 +55,7 @@ return {
             mixTarget = 'host',
             suggestSpecs = true,
             signatureAfterComplete = true,
-            -- stdlibSrcDir = get_elixir_stdlib_dir()
+            stdlibSrcDir = get_elixir_stdlib_dir()
           },
         },
       }

@@ -122,7 +122,20 @@ vim.api.nvim_create_user_command(
   { nargs = '+' }
 )
 
+vim.api.nvim_create_user_command(
+  'CheckCommand',
+  function(opts)
+    delete_term_buf()
+    vim.g.run_test_last_command = 'make check'
+
+    term({ command = vim.g.run_test_last_command, split = opts.fargs[1], split_size = opts.fargs[2] })
+  end,
+  { nargs = '+' }
+)
+
 vim.keymap.set('n', '<m-,>', delete_term_buf, opts)
+vim.keymap.set('n', '<m-c>',
+  function() vim.cmd.CheckCommand(vim.g.run_test_split_orientation, vim.g.run_test_split_size) end, opts)
 vim.keymap.set('n', '<m-f>',
   function() vim.cmd.FullTestCommand(vim.g.run_test_split_orientation, vim.g.run_test_split_size) end, opts)
 vim.keymap.set('n', '<m-l>',
